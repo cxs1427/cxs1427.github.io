@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>一些爬虫tricks | Chen's Blog</title><meta name="author" content="Chen Xs"><meta name="copyright" content="Chen Xs"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="请求的时候去掉header1234&quot;Host&quot;: &quot;teslamotorsclub.com&quot;,&quot;Connection&quot;: &quot;keep-alive&quot;,&quot;Pragma&quot;: &quot;no-cache&quot;,&quot;Cache-Control&quot;: &quot;no-cache&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些爬虫tricks">
+<meta property="og:url" content="https://chenxs1427.github.io/2023/09/30/%E4%B8%80%E4%BA%9B%E7%88%AC%E8%99%ABtricks/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="请求的时候去掉header1234&quot;Host&quot;: &quot;teslamotorsclub.com&quot;,&quot;Connection&quot;: &quot;keep-alive&quot;,&quot;Pragma&quot;: &quot;no-cache&quot;,&quot;Cache-Control&quot;: &quot;no-cache&amp;quo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/09/28/byzqkJ1vHiLhYNo.jpg">
+<meta property="article:published_time" content="2023-09-30T02:35:50.000Z">
+<meta property="article:modified_time" content="2024-02-11T14:05:09.118Z">
+<meta property="article:author" content="Chen Xs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/28/byzqkJ1vHiLhYNo.jpg"><link rel="shortcut icon" href="https://s2.loli.net/2023/04/15/3vnNmAl8Yxa5EIK.png"><link rel="canonical" href="https://chenxs1427.github.io/2023/09/30/%E4%B8%80%E4%BA%9B%E7%88%AC%E8%99%ABtricks/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Chen Xs","link":"链接: ","source":"来源: Chen's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '一些爬虫tricks',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-11 22:05:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-electric-clock-plus@latest/css/clock.css"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/06/28/qRyt6e5NoVs4cdD.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/cat/"><i class="fa-fw fas fa-regular fa-cat fa-bounce"></i><span> 喵喵</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/galleryGroup/"><i class="fa-fw fas fa-leaf"></i><span> 相册</span></a></li><li><a class="site-page child" href="/college-poems/"><i class="fa-fw fas fa-fire"></i><span> 诗选</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 读书</span></a></li><li><a class="site-page child" href="/cooks/"><i class="fa-fw fas fa-utensils"></i><span> 厨艺</span></a></li><li><a class="site-page child" href="/cinemas/"><i class="fa-fw fas fa-mountain"></i><span> 追剧</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-yin-yang"></i><span> 追番</span></a></li><li><a class="site-page child" href="/cars/"><i class="fa-fw fas fa-car"></i><span> 科目三</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/games/"><i class="fa-fw fas fa-sign-language"></i><span> 游戏</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/money/"><i class="fa-fw fas fa-sack-dollar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/about-me/"><i class="fa-fw fas fa-heart fa-beat"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/09/28/byzqkJ1vHiLhYNo.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Chen's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/cat/"><i class="fa-fw fas fa-regular fa-cat fa-bounce"></i><span> 喵喵</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/galleryGroup/"><i class="fa-fw fas fa-leaf"></i><span> 相册</span></a></li><li><a class="site-page child" href="/college-poems/"><i class="fa-fw fas fa-fire"></i><span> 诗选</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 读书</span></a></li><li><a class="site-page child" href="/cooks/"><i class="fa-fw fas fa-utensils"></i><span> 厨艺</span></a></li><li><a class="site-page child" href="/cinemas/"><i class="fa-fw fas fa-mountain"></i><span> 追剧</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-yin-yang"></i><span> 追番</span></a></li><li><a class="site-page child" href="/cars/"><i class="fa-fw fas fa-car"></i><span> 科目三</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/games/"><i class="fa-fw fas fa-sign-language"></i><span> 游戏</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/money/"><i class="fa-fw fas fa-sack-dollar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/about-me/"><i class="fa-fw fas fa-heart fa-beat"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">一些爬虫tricks</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-30T02:35:50.000Z" title="发表于 2023-09-30 10:35:50">2023-09-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-11T14:05:09.118Z" title="更新于 2024-02-11 22:05:09">2024-02-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="请求的时候去掉header"><a href="#请求的时候去掉header" class="headerlink" title="请求的时候去掉header"></a>请求的时候去掉header</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;Host&quot;</span><span class="punctuation">:</span> <span class="string">&quot;teslamotorsclub.com&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;Connection&quot;</span><span class="punctuation">:</span> <span class="string">&quot;keep-alive&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;Pragma&quot;</span><span class="punctuation">:</span> <span class="string">&quot;no-cache&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;Cache-Control&quot;</span><span class="punctuation">:</span> <span class="string">&quot;no-cache&quot;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h3><h4 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h4><p><a target="_blank" rel="noopener" href="https://github.com/r3x5ur/unveilr%EF%BC%88%E5%B7%B2%E5%88%A0%E5%BA%93%EF%BC%89">https://github.com/r3x5ur/unveilr（已删库）</a></p>
+<p><strong>用法：</strong>先用UnpackMiniApp解密，再运行命令 <code>unveilr.exe 4h43h4j3h43.wxapkg</code></p>
+<h4 id="动态调试"><a href="#动态调试" class="headerlink" title="动态调试"></a>动态调试</h4><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1434y1K7mL?p=31&vd_source=7bc74c03d428ba2cb86d82a6d0bf127a">【6-1】小程序逆向基本工具的使用</a></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/10/07/qOgUNpDbCJ8jEz9.png" alt="image.png"> </p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/10/07/U6k5AIPXMBOTd9w.png" alt="image.png"> </p>
+<h4 id="多包反编译"><a href="#多包反编译" class="headerlink" title="多包反编译"></a>多包反编译</h4><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1434y1K7mL/?p=34&spm_id_from=333.999.top_right_bar_window_history.content.click&vd_source=7bc74c03d428ba2cb86d82a6d0bf127a">【6-4】小程序逆向多包反编译与前面加密处理</a></p>
+<p>对小程序的逐个包进行解密，然后直接反编译<strong>文件夹</strong>，注意wxapkg的文件名保持一致即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unveilr D:\cxs</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="wx-login-code-的调用获取"><a href="#wx-login-code-的调用获取" class="headerlink" title="wx.login code 的调用获取"></a>wx.login code 的调用获取</h4><p>例如：0a14390w33UZS130DT3w30Gne324390U</p>
+<p><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/minigame/dev/api/open-api/login/wx.login.html">https://developers.weixin.qq.com/minigame/dev/api/open-api/login/wx.login.html</a></p>
+<h4 id="httpx隐藏ssl指纹"><a href="#httpx隐藏ssl指纹" class="headerlink" title="httpx隐藏ssl指纹"></a>httpx隐藏ssl指纹</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ssl</span><br><span class="line"><span class="keyword">import</span> httpx</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">ORIGIN_CIPHERS = (</span><br><span class="line">    <span class="string">&#x27;ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+HIGH:&#x27;</span></span><br><span class="line">    <span class="string">&#x27;DH+HIGH:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+HIGH:RSA+3DES&#x27;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SSLFactory</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.ciphers = ORIGIN_CIPHERS.split(<span class="string">&quot;:&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self</span>):</span><br><span class="line">        random.shuffle(self.ciphers)</span><br><span class="line">        ciphers = <span class="string">&quot;:&quot;</span>.join(self.ciphers)</span><br><span class="line">        ciphers = ciphers + <span class="string">&quot;:!aNULL:!eNULL:!MD5&quot;</span></span><br><span class="line">        context = ssl.create_default_context()</span><br><span class="line">        context.set_ciphers(ciphers)</span><br><span class="line">        <span class="keyword">return</span> context</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sslgen = SSLFactory()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用法一，同步</span></span><br><span class="line">client = httpx.Client(headers=headers, timeout=<span class="number">15</span>, proxies=proxy, verify=sslgen())</span><br><span class="line">response = client.get(url=url)</span><br><span class="line">client.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用法二，上下文</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">with</span> httpx.AsyncClient(headers=headers, proxies=proxies, verify=sslgen()) <span class="keyword">as</span> client:</span><br><span class="line">    response = client.get(url=url)</span><br></pre></td></tr></table></figure>
+
+<h4 id="requests隐藏ssl指纹"><a href="#requests隐藏ssl指纹" class="headerlink" title="requests隐藏ssl指纹"></a>requests隐藏ssl指纹</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> requests.adapters <span class="keyword">import</span> HTTPAdapter</span><br><span class="line"><span class="keyword">from</span> requests.packages.urllib3.util.ssl_ <span class="keyword">import</span> create_urllib3_context</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ORIGIN_CIPHERS = (<span class="string">&#x27;ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+HIGH:&#x27;</span></span><br><span class="line">                  <span class="string">&#x27;DH+HIGH:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+HIGH:RSA+3DES&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DESAdapter</span>(<span class="title class_ inherited__">HTTPAdapter</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, *args, **kwargs</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        A TransportAdapter that re-enables 3DES support in Requests.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        CIPHERS = ORIGIN_CIPHERS.split(<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line">        random.shuffle(CIPHERS)</span><br><span class="line">        CIPHERS = <span class="string">&#x27;:&#x27;</span>.join(CIPHERS)</span><br><span class="line">        self.CIPHERS = CIPHERS + <span class="string">&#x27;:!aNULL:!eNULL:!MD5&#x27;</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(*args, **kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_poolmanager</span>(<span class="params">self, *args, **kwargs</span>):</span><br><span class="line">        context = create_urllib3_context(ciphers=self.CIPHERS)</span><br><span class="line">        kwargs[<span class="string">&#x27;ssl_context&#x27;</span>] = context</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>(DESAdapter, self).init_poolmanager(*args, **kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">proxy_manager_for</span>(<span class="params">self, *args, **kwargs</span>):</span><br><span class="line">        context = create_urllib3_context(ciphers=self.CIPHERS)</span><br><span class="line">        kwargs[<span class="string">&#x27;ssl_context&#x27;</span>] = context</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>(DESAdapter, self).proxy_manager_for(*args, **kwargs)</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">session = requests.Session()</span><br><span class="line">session.mount(url, DESAdapter())</span><br></pre></td></tr></table></figure>
+
+<h4 id="curl-cffi-的使用"><a href="#curl-cffi-的使用" class="headerlink" title="curl_cffi 的使用"></a>curl_cffi 的使用</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> curl_cffi <span class="keyword">import</span> requests</span><br></pre></td></tr></table></figure>
+
+<h4 id="express搭建http服务"><a href="#express搭建http服务" class="headerlink" title="express搭建http服务"></a>express搭建http服务</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>()</span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(bodyParser.<span class="title function_">json</span>())</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/h5st&#x27;</span>, <span class="keyword">function</span> (<span class="params">req, res</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> result = req.<span class="property">body</span>;</span><br><span class="line">    <span class="keyword">let</span> data = result.<span class="property">data</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">    res.<span class="title function_">set</span>(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/json&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> data_ = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data));</span><br><span class="line">    body_ = data.<span class="property">body</span>;</span><br><span class="line">    data_.<span class="property">body</span> = <span class="title class_">CryptoJS</span>.<span class="title class_">SHA256</span>(body_).<span class="title function_">toString</span>()</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">PSign</span>.<span class="title function_">sign</span>(data_).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">        res.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;<span class="string">&quot;h5st&quot;</span>: <span class="built_in">encodeURI</span>(e.<span class="property">h5st</span>)&#125;));</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">8911</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;开启服务，端口8911&quot;</span>, <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toString</span>().<span class="title function_">replace</span>(<span class="regexp">/\+0800.*/</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="随机返回古诗"><a href="#随机返回古诗" class="headerlink" title="随机返回古诗"></a>随机返回古诗</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">jinrishici</span>():</span><br><span class="line">    poem_api = <span class="string">&quot;https://v2.jinrishici.com/one.json&quot;</span></span><br><span class="line">    params = &#123;</span><br><span class="line">        <span class="string">&quot;client&quot;</span>: <span class="string">&quot;browser-sdk/1.2&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-User-Token&quot;</span>: <span class="string">&quot;SPw7uQvsfkhrtJte9ljEock8hiuq+W/o&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    poem_json = requests.get(poem_api, params=params).json()</span><br><span class="line">    desc = poem_json[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;content&quot;</span>]</span><br><span class="line">    title = poem_json[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;origin&quot;</span>][<span class="string">&quot;title&quot;</span>]</span><br><span class="line">    content = poem_json[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;origin&quot;</span>][<span class="string">&quot;content&quot;</span>]</span><br><span class="line">    author = poem_json[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;origin&quot;</span>][<span class="string">&quot;author&quot;</span>]</span><br><span class="line">    translate = poem_json[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;origin&quot;</span>][<span class="string">&quot;translate&quot;</span>]</span><br><span class="line">    <span class="keyword">return</span> desc, author, title</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="JS-Hook-脚本"><a href="#JS-Hook-脚本" class="headerlink" title="JS Hook 脚本"></a>JS Hook 脚本</h4><p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ikdl/p/15352809.html">https://www.cnblogs.com/ikdl/p/15352809.html</a></p>
+<ul>
+<li>Header</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> org = <span class="variable language_">window</span>.<span class="property">XMLHttpRequest</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">setRequestHeader</span>;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">XMLHttpRequest</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">setRequestHeader</span> = <span class="keyword">function</span> (<span class="params">key, value</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="string">&#x27;Authorization&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">debugger</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> org.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Cookie</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="string">&#x27;use strict&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> cookieTemp = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="variable language_">document</span>, <span class="string">&#x27;cookie&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">set</span>: <span class="keyword">function</span> (<span class="params">val</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (val.<span class="title function_">indexOf</span>(<span class="string">&#x27;__dfp&#x27;</span>) != -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">debugger</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hook捕获到cookie设置-&gt;&#x27;</span>, val);</span><br><span class="line">      cookieTemp = val;</span><br><span class="line">      <span class="keyword">return</span> val;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> cookieTemp;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="string">&#x27;use strict&#x27;</span>;</span><br><span class="line">    <span class="keyword">var</span> org = <span class="variable language_">document</span>.<span class="property">cookie</span>.<span class="title function_">__lookupSetter__</span>(<span class="string">&#x27;cookie&#x27;</span>);</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">__defineSetter__</span>(<span class="string">&#x27;cookie&#x27;</span>, <span class="keyword">function</span> (<span class="params">cookie</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cookie.<span class="title function_">indexOf</span>(<span class="string">&#x27;__dfp&#x27;</span>) != -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">debugger</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        org = cookie;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">__defineGetter__</span>(<span class="string">&#x27;cookie&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> org;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Json</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// parse()</span></span><br><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> parse = <span class="title class_">JSON</span>.<span class="property">parse</span>;</span><br><span class="line">    <span class="title class_">JSON</span>.<span class="property">parse</span> = <span class="keyword">function</span>(<span class="params">params</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hook JSON.parse ——&gt; &quot;</span>, params);</span><br><span class="line">        <span class="keyword">debugger</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">parse</span>(params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// stringify()</span></span><br><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> stringify = <span class="title class_">JSON</span>.<span class="property">stringify</span>;</span><br><span class="line">    <span class="title class_">JSON</span>.<span class="property">stringify</span> = <span class="keyword">function</span>(<span class="params">params</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hook JSON.stringify ——&gt; &quot;</span>, params);</span><br><span class="line">        <span class="keyword">debugger</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">stringify</span>(params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Eval</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 保存原始方法</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">__cr_eval</span> = <span class="variable language_">window</span>.<span class="property">eval</span>;</span><br><span class="line">    <span class="comment">// 重写 eval</span></span><br><span class="line">    <span class="keyword">var</span> myeval = <span class="keyword">function</span>(<span class="params">src</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(src);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;=============== eval end ===============&quot;</span>);</span><br><span class="line">        <span class="keyword">debugger</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">window</span>.<span class="title function_">__cr_eval</span>(src);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 屏蔽 JS 中对原生函数 native 属性的检测</span></span><br><span class="line">    <span class="keyword">var</span> _myeval = myeval.<span class="title function_">bind</span>(<span class="literal">null</span>);</span><br><span class="line">    _myeval.<span class="property">toString</span> = <span class="variable language_">window</span>.<span class="property">__cr_eval</span>.<span class="property">toString</span>;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="variable language_">window</span>, <span class="string">&#x27;eval&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">value</span>: _myeval</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Url</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Fiddler-内存漫游"><a href="#Fiddler-内存漫游" class="headerlink" title="Fiddler 内存漫游"></a>Fiddler 内存漫游</h4><p>编程猫插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">链接: https://pan.baidu.com/s/1N8UVyHSF3qUqsNJa7w3PsQ?pwd=pdgy </span><br><span class="line">提取码: pdgy 复制这段内容后打开百度网盘手机App，操作更方便哦</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="fiddler-命令行"><a href="#fiddler-命令行" class="headerlink" title="fiddler 命令行"></a>fiddler 命令行</h4><p><code>?sometext</code>  搜索特定文本</p>
+<p><code>@cxs.com</code> 域名定位</p>
+<p><code>=301</code></p>
+<p><code>=post</code>  定位状态码，method</p>
+<p><a target="_blank" rel="noopener" href="http://pychong.com/article/47.html">js逆向：浏览器内存漫游安装与使用 - 爬虫之家</a></p>
+<p>用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hook.<span class="title function_">search</span>(<span class="string">&quot;f9ad7f8a78df78df7a97d8f8dfaer68er&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h4><blockquote>
+<p>用来加载各种函数和模块的方法</p>
+</blockquote>
+<p>入门：<a target="_blank" rel="noopener" href="http://pychong.com/article/23.html">http://pychong.com/article/23.html</a></p>
+<p>实战：<a target="_blank" rel="noopener" href="http://pychong.com/article/24.html">http://pychong.com/article/24.html</a></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/10/02/bcoITN4ZHwYPl2m.png" alt="image.png"></p>
+<h4 id="Smail-日志-amp-修改"><a href="#Smail-日志-amp-修改" class="headerlink" title="Smail 日志&amp;修改"></a>Smail 日志&amp;修改</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 加上 <span class="built_in">log</span>，印出 <span class="string">&quot;we are here&quot;</span></span><br><span class="line"><span class="type">const</span>-<span class="built_in">string</span> v1, <span class="string">&quot;we are here&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>查看日志</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清除之前的日志</span></span><br><span class="line">adb logcat -c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某个包</span></span><br><span class="line">adb logcat --pid=`adb shell pidof -s com.cymetrics.demo`</span><br></pre></td></tr></table></figure>
+
+<p>函数返回false</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 在開頭新增底下這兩行，永遠回傳 <span class="literal">false</span></span><br><span class="line"><span class="type">const</span>/<span class="number">4</span> v0, <span class="number">0x0</span></span><br><span class="line"><span class="keyword">return</span> v0</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Android-抓包"><a href="#Android-抓包" class="headerlink" title="Android 抓包"></a>Android 抓包</h4><p><a target="_blank" rel="noopener" href="https://blog.huli.tw/2023/04/27/android-apk-decompile-intro-3/">https://blog.huli.tw/2023/04/27/android-apk-decompile-intro-3/</a></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/10/06/ONld8PYptyuba2e.png" alt="image.png"></p>
+<h3 id="Frida-技巧"><a href="#Frida-技巧" class="headerlink" title="Frida 技巧"></a>Frida 技巧</h3><h4 id="无需-root"><a href="#无需-root" class="headerlink" title="无需 root"></a>无需 root</h4><p><a target="_blank" rel="noopener" href="https://blog.huli.tw/2023/04/27/android-apk-decompile-intro-4/">Android App 逆向入門之四：使用 Frida 進行動態分析 - Huli’s blog</a></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/10/06/jYm9uonsl3pKJQi.png" alt="image-20231006135139833"></p>
+<p>脚本注入方式：先 patch app，然後在 terminal 輸入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frida -U Gadget -l script.js</span><br></pre></td></tr></table></figure>
+
+<p>接著 terminal 上面多了一行 log，內容就是 <code>MainActivity onCreate</code>，而手機上出現 app crash 的訊息，這是正常的。</p>
+<h4 id="overload-传参"><a href="#overload-传参" class="headerlink" title="overload 传参"></a>overload 传参</h4><blockquote>
+<p>建议再每次覆盖原函数之前，都加上 <code>overload()</code></p>
+</blockquote>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/10/07/bkcJvsjaZy37XNm.png" alt="image.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MainActivity.onCreate.overload().implementation = function() &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="其他操作："><a href="#其他操作：" class="headerlink" title="其他操作："></a>其他操作：</h4><ul>
+<li>打印 stack trace</li>
+<li>hook Reflect 反射</li>
+<li>hook 字符串</li>
+<li>hook 加解密</li>
+<li>SSL Pinning</li>
+</ul>
+<h3 id="Objection-技巧"><a href="#Objection-技巧" class="headerlink" title="Objection 技巧"></a>Objection 技巧</h3><p>参考: <a target="_blank" rel="noopener" href="https://www.zhuoyue360.com/crack/92.html">https://www.zhuoyue360.com/crack/92.html</a></p>
+<h4 id="绕过SSL"><a href="#绕过SSL" class="headerlink" title="绕过SSL"></a>绕过SSL</h4><p>启动objection</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objection -g 海南航空 explore</span><br></pre></td></tr></table></figure>
+
+<p>输入SSL绕过命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android sslpinning <span class="built_in">disable</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="hook-类方法"><a href="#hook-类方法" class="headerlink" title="hook 类方法"></a>hook 类方法</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android hooking watch class_method com.rytong.hnair.HNASignature.getHNASignature --dump-args --dump-return</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>android hooking watch</code> 为固定写法，<code>class_method</code> 表示目标为<strong>类方法</strong></p>
+<p>各个参数作用:</p>
+<ul>
+<li><code>--dump-args</code> 查看参数</li>
+<li><code>--call-original</code> 调用原始的方法实现，而不是注入的代码</li>
+<li><code>--dump-return</code> 查看返回值</li>
+<li><code>--set-return &quot;hooked&quot;</code> 设置返回值</li>
+<li><code>--native</code> hook native方法</li>
+<li> <code>--call-back my_func</code> 用自定义函数替换方法   </li>
+<li> <code>--watch-traces --depth 5</code> 查看调用堆栈</li>
+<li> <code>--dump-backtrace</code> 查看调用链路</li>
+</ul>
+<h4 id="hook-类"><a href="#hook-类" class="headerlink" title="hook 类"></a>hook 类</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android hooking watch class com.example.MyClass --dump-args --dump-return</span><br></pre></td></tr></table></figure>
+
+<p>查看调用了哪些函数，以及函数的入参和返回</p>
+<h4 id="hook-native函数"><a href="#hook-native函数" class="headerlink" title="hook native函数"></a>hook native函数</h4><p>通过【基地址】+ 【偏移】来定位函数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android hooking watch native --offset 0x6BC23000+0x1540 --dump-args --dump-return</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>用IDA定位到要hook的native函数,例如在<strong>libnative.so</strong>里面的<code>Java_com_example_NativeFunc</code>，查看函数的偏移 <code>0x1540</code></li>
+<li>使用objection中的<code>android memory list modules</code>命令列出加载的模块，找到<strong>libnative.so</strong>对应的基地址,例如<code>0x6BC23000</code></li>
+</ol>
+<h3 id="安卓主动调用方案"><a href="#安卓主动调用方案" class="headerlink" title="安卓主动调用方案"></a>安卓主动调用方案</h3><h4 id="Xposed-Sekiro"><a href="#Xposed-Sekiro" class="headerlink" title="Xposed + Sekiro"></a>Xposed + Sekiro</h4><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/CFu1LbPbFB4OnNnKShdccw">安卓逆向 | 主动调用方案之sekiro + xposed</a></p>
+<h4 id="自由职业注意事项："><a href="#自由职业注意事项：" class="headerlink" title="自由职业注意事项："></a>自由职业注意事项：</h4><ol>
+<li>每天要做什么你必须非常清楚，而且还有对应的时间表</li>
+<li>收入=你提供的价值+对应受众的人数</li>
+<li>你没有很紧迫的资金压力</li>
+<li>你一天有工作中10个小时以上的准备</li>
+<li>一定要让自己的能力跑到头部领域，这样你才被关注的资本</li>
+<li><strong>每次保持学习，和职业技能的精进，明白核心竞争力并不断去优化它</strong></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chen Xs</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://chenxs1427.github.io/2023/09/30/%E4%B8%80%E4%BA%9B%E7%88%AC%E8%99%ABtricks/">https://chenxs1427.github.io/2023/09/30/%E4%B8%80%E4%BA%9B%E7%88%AC%E8%99%ABtricks/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://chenxs1427.github.io" target="_blank">Chen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/09/28/byzqkJ1vHiLhYNo.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/11/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%AC%AC%E4%BA%8C%E5%B1%8Aweb%E5%AF%B9%E6%8A%97%E8%B5%9B/"><img class="prev-cover" src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/BMkSRaJAhncQG9o.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">猿人学第二届web对抗赛</div></div></a></div><div class="next-post pull-right"><a href="/2023/07/22/%E5%BF%AB%E6%89%8B%E3%80%81%E5%B7%A8%E9%87%8F%E7%AE%97%E6%95%B0/"><img class="next-cover" src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/UL38TWEoS4gXZvl.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">快手web滑块和巨量算数小程序AES算法还原</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/06/28/qRyt6e5NoVs4cdD.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chen Xs</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cxs1427" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E7%9A%84%E6%97%B6%E5%80%99%E5%8E%BB%E6%8E%89header"><span class="toc-number">1.</span> <span class="toc-text">请求的时候去掉header</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F"><span class="toc-number"></span> <span class="toc-text">小程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="toc-number">1.</span> <span class="toc-text">反编译</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95"><span class="toc-number">2.</span> <span class="toc-text">动态调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E5%8C%85%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="toc-number">3.</span> <span class="toc-text">多包反编译</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wx-login-code-%E7%9A%84%E8%B0%83%E7%94%A8%E8%8E%B7%E5%8F%96"><span class="toc-number">4.</span> <span class="toc-text">wx.login code 的调用获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#httpx%E9%9A%90%E8%97%8Fssl%E6%8C%87%E7%BA%B9"><span class="toc-number">5.</span> <span class="toc-text">httpx隐藏ssl指纹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#requests%E9%9A%90%E8%97%8Fssl%E6%8C%87%E7%BA%B9"><span class="toc-number">6.</span> <span class="toc-text">requests隐藏ssl指纹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#curl-cffi-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">curl_cffi 的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#express%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1"><span class="toc-number">8.</span> <span class="toc-text">express搭建http服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E8%BF%94%E5%9B%9E%E5%8F%A4%E8%AF%97"><span class="toc-number">9.</span> <span class="toc-text">随机返回古诗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS-Hook-%E8%84%9A%E6%9C%AC"><span class="toc-number">10.</span> <span class="toc-text">JS Hook 脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Fiddler-%E5%86%85%E5%AD%98%E6%BC%AB%E6%B8%B8"><span class="toc-number">11.</span> <span class="toc-text">Fiddler 内存漫游</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fiddler-%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="toc-number">12.</span> <span class="toc-text">fiddler 命令行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpack"><span class="toc-number">13.</span> <span class="toc-text">webpack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Smail-%E6%97%A5%E5%BF%97-amp-%E4%BF%AE%E6%94%B9"><span class="toc-number">14.</span> <span class="toc-text">Smail 日志&amp;修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android-%E6%8A%93%E5%8C%85"><span class="toc-number">15.</span> <span class="toc-text">Android 抓包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Frida-%E6%8A%80%E5%B7%A7"><span class="toc-number"></span> <span class="toc-text">Frida 技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E9%9C%80-root"><span class="toc-number">1.</span> <span class="toc-text">无需 root</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#overload-%E4%BC%A0%E5%8F%82"><span class="toc-number">2.</span> <span class="toc-text">overload 传参</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">其他操作：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Objection-%E6%8A%80%E5%B7%A7"><span class="toc-number"></span> <span class="toc-text">Objection 技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%95%E8%BF%87SSL"><span class="toc-number">1.</span> <span class="toc-text">绕过SSL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hook-%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">hook 类方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hook-%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">hook 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hook-native%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">hook native函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%8D%93%E4%B8%BB%E5%8A%A8%E8%B0%83%E7%94%A8%E6%96%B9%E6%A1%88"><span class="toc-number"></span> <span class="toc-text">安卓主动调用方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Xposed-Sekiro"><span class="toc-number">1.</span> <span class="toc-text">Xposed + Sekiro</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E7%94%B1%E8%81%8C%E4%B8%9A%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">自由职业注意事项：</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/01/28/%E4%BA%AC%E4%B8%9Cm%E7%AB%AFh5st%E9%80%86%E5%90%91/" title="京东m端h5st逆向"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/VOJf1QrHL2gl9X4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="京东m端h5st逆向"/></a><div class="content"><a class="title" href="/2024/01/28/%E4%BA%AC%E4%B8%9Cm%E7%AB%AFh5st%E9%80%86%E5%90%91/" title="京东m端h5st逆向">京东m端h5st逆向</a><time datetime="2024-01-27T16:37:47.000Z" title="发表于 2024-01-28 00:37:47">2024-01-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/05/%E5%B0%8F%E8%82%A9%E8%86%80js%E8%A1%A5%E7%8E%AF%E5%A2%83%E8%AF%BE%E7%A8%8B/" title="小肩膀js补环境课程"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/l1oxC2YHL9raeT3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="小肩膀js补环境课程"/></a><div class="content"><a class="title" href="/2024/01/05/%E5%B0%8F%E8%82%A9%E8%86%80js%E8%A1%A5%E7%8E%AF%E5%A2%83%E8%AF%BE%E7%A8%8B/" title="小肩膀js补环境课程">小肩膀js补环境课程</a><time datetime="2024-01-05T10:03:40.000Z" title="发表于 2024-01-05 18:03:40">2024-01-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/10/docker%E7%AC%94%E8%AE%B0/" title="docker学习笔记"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/vcDPi9YnKjhJABX.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker学习笔记"/></a><div class="content"><a class="title" href="/2023/12/10/docker%E7%AC%94%E8%AE%B0/" title="docker学习笔记">docker学习笔记</a><time datetime="2023-12-09T22:42:39.000Z" title="发表于 2023-12-10 06:42:39">2023-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/07/%E6%B5%B7%E5%A4%96%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%B1%87%E6%80%BB/" title="海外数据采集汇总"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/rYJHbGxS9yDacLu.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="海外数据采集汇总"/></a><div class="content"><a class="title" href="/2023/12/07/%E6%B5%B7%E5%A4%96%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%B1%87%E6%80%BB/" title="海外数据采集汇总">海外数据采集汇总</a><time datetime="2023-12-07T03:54:45.000Z" title="发表于 2023-12-07 11:54:45">2023-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/26/python%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%9B%9B/" title="python编程技巧（四）"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/Fs8u7mwTRkEUqAN.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python编程技巧（四）"/></a><div class="content"><a class="title" href="/2023/10/26/python%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%9B%9B/" title="python编程技巧（四）">python编程技巧（四）</a><time datetime="2023-10-26T08:13:29.000Z" title="发表于 2023-10-26 16:13:29">2023-10-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><!-- if theme.footer.owner.since && theme.footer.owner.since != nowYear// .copyright!= `&copy;${theme.footer.owner.since} - ${nowYear} By ${config.author}`--><!-- else--><div class="copyright">&copy;某年某月 <i class='fas fa-bug fa-spin'></i> By Chen Xs</div><!-- if theme.footer.copyright// .framework-info
+  // span= _p('footer.framework') + ' '
+  // a(href='https://hexo.io')= 'Hexo'
+  // span.footer-separator |
+  // span= _p('footer.theme') + ' '
+  // a(href='https://github.com/jerryc127/hexo-theme-butterfly')= 'Butterfly'--><!-- if theme.footer.custom_text// .footer_custom_text!=`${theme.footer.custom_text}`
+--></div><div class="container" id="jsi-flying-fish-container"><script src="/js/fish.js"></script></div><style>   @media only screen and (max-width: 767px){
+   #sidebar_search_box input[type=text]{width:calc(100% - 24px)}
+}</style></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script src="/js/fish_jquery.js"></script><script src="/js/chocolate.js"></script><script src="/js/fish.js"></script><div class="aplayer no-destroy" data-id="3145079790" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/SerokSSR/cdn/meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script type="text/javascript">var font='Computerfont'</script><script data-pjax>function electric_clock_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img id="card-clock-loading" src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading" class="entered loading"></div></div></div></div></div>';
+                console.log('已挂载electric_clock')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='all'|| 'all' ==='all')){
+
+            electric_clock_injector_config()
+        } </script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+        <script type="text/javascript">
+            loc = $.ajax({
+                    url: "https://ipapi.co/json/",  //json文件位置，文件名
+                    type: "GET",                    //请求方式为get
+                    dataType: "json",               //返回数据格式为json
+                    async: false,
+                    success: function(data) {       //请求成功完成后要执行的方法 
+                    }
+                });
+            ip=$.parseJSON(loc.responseText).ip;
+            version=$.parseJSON(loc.responseText).version;
+            city=$.parseJSON(loc.responseText).city;
+            country=$.parseJSON(loc.responseText).country_name;
+        </script>
+        <script data-pjax src="https://cdn.jsdelivr.net/npm/hexo-electric-clock-plus@latest/js/clock.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题为Butterfly" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><!-- hexo injector body_end end --></body></html>

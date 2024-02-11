@@ -1,0 +1,440 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Python编程技巧（二） | Chen's Blog</title><meta name="author" content="Chen Xs"><meta name="copyright" content="Chen Xs"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="pip 笔记pip 和pip3 的区别  如果系统中同时安装了Python2和Python3，则pip默认给Python2用，pip3指定给Python3用  若只存在一个python版本，可以认为在用系统中pip和pip3命令都是相同的   更新依赖  pip3 install cloudscraper --upgrade 或者 -U 列出所有依赖  pip3 list 指定豆瓣源    暂时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python编程技巧（二）">
+<meta property="og:url" content="https://chenxs1427.github.io/2022/05/17/Python%E7%BC%96%E7%A8%8B-%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="pip 笔记pip 和pip3 的区别  如果系统中同时安装了Python2和Python3，则pip默认给Python2用，pip3指定给Python3用  若只存在一个python版本，可以认为在用系统中pip和pip3命令都是相同的   更新依赖  pip3 install cloudscraper --upgrade 或者 -U 列出所有依赖  pip3 list 指定豆瓣源    暂时">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/09/28/uqsKRJyDPXY6cIN.jpg">
+<meta property="article:published_time" content="2022-05-16T23:52:54.000Z">
+<meta property="article:modified_time" content="2024-02-11T14:05:09.089Z">
+<meta property="article:author" content="Chen Xs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/28/uqsKRJyDPXY6cIN.jpg"><link rel="shortcut icon" href="https://s2.loli.net/2023/04/15/3vnNmAl8Yxa5EIK.png"><link rel="canonical" href="https://chenxs1427.github.io/2022/05/17/Python%E7%BC%96%E7%A8%8B-%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%88%E4%BA%8C%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Chen Xs","link":"链接: ","source":"来源: Chen's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python编程技巧（二）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-11 22:05:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-electric-clock-plus@latest/css/clock.css"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/06/28/qRyt6e5NoVs4cdD.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/cat/"><i class="fa-fw fas fa-regular fa-cat fa-bounce"></i><span> 喵喵</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/galleryGroup/"><i class="fa-fw fas fa-leaf"></i><span> 相册</span></a></li><li><a class="site-page child" href="/college-poems/"><i class="fa-fw fas fa-fire"></i><span> 诗选</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 读书</span></a></li><li><a class="site-page child" href="/cooks/"><i class="fa-fw fas fa-utensils"></i><span> 厨艺</span></a></li><li><a class="site-page child" href="/cinemas/"><i class="fa-fw fas fa-mountain"></i><span> 追剧</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-yin-yang"></i><span> 追番</span></a></li><li><a class="site-page child" href="/cars/"><i class="fa-fw fas fa-car"></i><span> 科目三</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/games/"><i class="fa-fw fas fa-sign-language"></i><span> 游戏</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/money/"><i class="fa-fw fas fa-sack-dollar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/about-me/"><i class="fa-fw fas fa-heart fa-beat"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/09/28/uqsKRJyDPXY6cIN.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Chen's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/cat/"><i class="fa-fw fas fa-regular fa-cat fa-bounce"></i><span> 喵喵</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/galleryGroup/"><i class="fa-fw fas fa-leaf"></i><span> 相册</span></a></li><li><a class="site-page child" href="/college-poems/"><i class="fa-fw fas fa-fire"></i><span> 诗选</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 读书</span></a></li><li><a class="site-page child" href="/cooks/"><i class="fa-fw fas fa-utensils"></i><span> 厨艺</span></a></li><li><a class="site-page child" href="/cinemas/"><i class="fa-fw fas fa-mountain"></i><span> 追剧</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-yin-yang"></i><span> 追番</span></a></li><li><a class="site-page child" href="/cars/"><i class="fa-fw fas fa-car"></i><span> 科目三</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/games/"><i class="fa-fw fas fa-sign-language"></i><span> 游戏</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/money/"><i class="fa-fw fas fa-sack-dollar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/about-me/"><i class="fa-fw fas fa-heart fa-beat"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python编程技巧（二）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-16T23:52:54.000Z" title="发表于 2022-05-17 07:52:54">2022-05-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-11T14:05:09.089Z" title="更新于 2024-02-11 22:05:09">2024-02-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/python%E6%95%99%E7%A8%8B/">python教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="pip-笔记"><a href="#pip-笔记" class="headerlink" title="pip 笔记"></a>pip 笔记</h3><p><strong>pip 和pip3 的区别</strong></p>
+<ul>
+<li><p>如果系统中同时安装了Python2和Python3，则pip默认给Python2用，pip3指定给Python3用</p>
+</li>
+<li><p>若只存在一个python版本，可以认为在用系统中pip和pip3命令都是相同的</p>
+</li>
+</ul>
+<p><strong>更新依赖</strong>  <code>pip3 install cloudscraper --upgrade</code> 或者 <code>-U</code></p>
+<p><strong>列出所有依赖</strong>  <code>pip3 list</code></p>
+<p><strong>指定豆瓣源</strong>  </p>
+<ul>
+<li><p><strong>暂时</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install xxx -i https://pypi.doubanio.com/simple --trusted-host=pypi.douban.com</span><br><span class="line">-i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>永久</strong></p>
+<p>在pip.ini文件配置</p>
+</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = https://pypi.doubanio.com/simple/</span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span> = pypi.doubanio.com</span><br></pre></td></tr></table></figure>
+
+<p><strong>显示包信息</strong>  <code>pip show xxx</code></p>
+<p>自动跳过安装失败的包：<code>pip install -r requirements.txt --ignore-installed</code></p>
+<h4 id="Win10-cmd-设置代理"><a href="#Win10-cmd-设置代理" class="headerlink" title="Win10 cmd 设置代理"></a>Win10 cmd 设置代理</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set HTTP_PROXY=http://127.0.0.1:1080</span><br><span class="line">set HTTPS_PROXY=http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="英文单词"><a href="#英文单词" class="headerlink" title="英文单词"></a>英文单词</h3><ul>
+<li><strong>iterable</strong> 可迭代（可用for遍历）</li>
+<li><strong>immutable</strong>  不可变</li>
+<li><strong>hashable</strong>  可哈希，不可变对象</li>
+</ul>
+<h3 id="文件头utf8作用"><a href="#文件头utf8作用" class="headerlink" title="文件头utf8作用"></a>文件头utf8作用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Daningliu/article/details/121617391">https://blog.csdn.net/Daningliu/article/details/121617391</a></p>
+<ul>
+<li><strong>python2</strong>默认的编码格式是<strong>ASCII</strong>格式，<strong>python3</strong>默认的编码格式是<strong>utf-8</strong>格式</li>
+<li>在<strong>python2</strong>环境中编写代码时，如果代码（或者注释）有中文，则需要在文件的开头指定</li>
+<li><strong>python3</strong>环境中，源码文件默认使用utf-8编码，可以正常解析中文，不需要在开头指定</li>
+<li><strong>为了代码的可移植性，还是建议在编写程序的时候加上</strong></li>
+</ul>
+<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><blockquote>
+<p>装饰器本质上是<strong>一个函数</strong>，在<strong>不修改函数源码</strong>的情况下,给函数<strong>增添一些新功能</strong>，类似 <strong>hook</strong></p>
+</blockquote>
+<p><strong>简单的计时装饰器</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 接收一个函数作为参数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">timer</span>(<span class="params">func</span>):</span><br><span class="line">    <span class="comment"># *args，**kwargs，解决参数传递问题</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args,**kwargs</span>):</span><br><span class="line">        startTime = datetime.now()</span><br><span class="line">        result = func(*args,**kwargs)</span><br><span class="line">        endTime = datetime.now()</span><br><span class="line">        <span class="built_in">print</span>(endTime - startTime)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 返回原函数</span></span><br><span class="line">    <span class="keyword">return</span> wrapper  </span><br></pre></td></tr></table></figure>
+
+<p><strong>类装饰器</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检测数据，统一输出日志</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_data</span>(<span class="params">func</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">self, *args</span>):</span><br><span class="line">        data = response.json()</span><br><span class="line">        <span class="keyword">if</span> item[<span class="string">&quot;category&quot;</span>] == <span class="string">&quot;股权质押&quot;</span>:</span><br><span class="line">            data = data[<span class="string">&quot;list&quot;</span>]</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">                self.logger.info(</span><br><span class="line">                    <span class="string">f&quot;<span class="subst">&#123;item[<span class="string">&#x27;company&#x27;</span>]&#125;</span> <span class="subst">&#123;item[<span class="string">&#x27;url&#x27;</span>]&#125;</span> 暂无 <span class="subst">&#123;item[<span class="string">&#x27;category&#x27;</span>]&#125;</span>&quot;</span></span><br><span class="line">                )</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">return</span> func(self, *args)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="钻石继承：（多继承问题）"><a href="#钻石继承：（多继承问题）" class="headerlink" title="钻石继承：（多继承问题）"></a>钻石继承：（多继承问题）</h3><p>​    a<br>  /    <br>b      c<br>  \     /<br>​    d<br>python 使用 <strong>MRO顺序</strong> 来解决 方法被重复调用的问题 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106963767">详见</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">human</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.name = <span class="string">&quot;&quot;</span></span><br><span class="line">        self.age = <span class="string">&quot;&quot;</span></span><br><span class="line">        self.gender = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">show_name</span>(<span class="params">self, name</span>):</span><br><span class="line">        <span class="built_in">print</span>(name)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">show_age</span>(<span class="params">self, age</span>):</span><br><span class="line">        <span class="built_in">print</span>(age)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">show_gender</span>(<span class="params">self, gender</span>):</span><br><span class="line">        <span class="built_in">print</span>(gender)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">show_info</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(self.name, self.age, self.gender)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">cxs</span>(<span class="title class_ inherited__">human</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, *args, **kwargs</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__(*args, **kwargs)</span><br><span class="line">        self.name = <span class="string">&quot;cxs&quot;</span></span><br><span class="line">        self.age = <span class="string">&quot;24&quot;</span></span><br><span class="line">        self.gender = <span class="string">&quot;man&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">c = cxs()</span><br><span class="line">c.show_name(<span class="string">&quot;cxs&quot;</span>)</span><br><span class="line">c.show_age(<span class="string">&quot;24&quot;</span>)</span><br><span class="line">c.show_gender(<span class="string">&quot;man&quot;</span>)</span><br><span class="line">c.show_info()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="OS-模块操作文件"><a href="#OS-模块操作文件" class="headerlink" title="OS 模块操作文件"></a>OS 模块操作文件</h3><blockquote>
+<p>对于任何的文件名的操作，你都应该使用 os.path 模块，而不是使用标准字符串操作来构造自己的代码。</p>
+</blockquote>
+<h4 id="遍历文件夹"><a href="#遍历文件夹" class="headerlink" title="遍历文件夹"></a>遍历文件夹</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 所有文件夹的完整路径</span></span><br><span class="line">In [<span class="number">45</span>]: [root <span class="keyword">for</span> root, folders, files <span class="keyword">in</span> os.walk(folder)]</span><br><span class="line">Out[<span class="number">45</span>]:</span><br><span class="line">[<span class="string">&#x27;C:\\Users\\chen_xiaosheng\\Desktop\\hello-world\\glidedsky全部关卡&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;C:\\Users\\chen_xiaosheng\\Desktop\\hello-world\\glidedsky全部关卡\\test1&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;C:\\Users\\chen_xiaosheng\\Desktop\\hello-world\\glidedsky全部关卡\\test2&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;C:\\Users\\chen_xiaosheng\\Desktop\\hello-world\\glidedsky全部关卡\\雪碧图2&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归获取所有文件夹</span></span><br><span class="line"><span class="comment"># [], [], [] 分别对应 &#x27;test1&#x27;, &#x27;test2&#x27;, &#x27;雪碧图2&#x27; 三个文件夹内部</span></span><br><span class="line">In [<span class="number">46</span>]: [folders <span class="keyword">for</span> root, folders, files <span class="keyword">in</span> os.walk(folder)]</span><br><span class="line">Out[<span class="number">46</span>]: [[<span class="string">&#x27;test1&#x27;</span>, <span class="string">&#x27;test2&#x27;</span>, <span class="string">&#x27;雪碧图2&#x27;</span>], [], [], []]  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归获取所有文件名</span></span><br><span class="line">In [<span class="number">52</span>]: [files <span class="keyword">for</span> root, folders, files <span class="keyword">in</span> os.walk(folder)]</span><br><span class="line">Out[<span class="number">52</span>]:</span><br><span class="line">[[<span class="string">&#x27;base_img.py&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;glided.html&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;glidedsky-capture.py&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;glidedsky.html&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;ip代理.py&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;屏幕坐标定位.exe&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;雪碧图.png&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;雪碧图.py&#x27;</span>],</span><br><span class="line"> [],</span><br><span class="line"> [],</span><br><span class="line"> [<span class="string">&#x27;baidu_nums.py&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;glided_screenshot.py&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;image_model.h5&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;img_api.py&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;num_recog.py&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;sprite_data.json&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;tencentAI.py&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;雪碧图-2.py&#x27;</span>]]</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取所有文件名"><a href="#获取所有文件名" class="headerlink" title="获取所有文件名"></a><strong>获取所有文件名</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">2</span>]: dir_path = <span class="string">&quot;C:/Windows/System32/winevt/Logs&quot;</span></span><br><span class="line">In [<span class="number">3</span>]: os.listdir(dir_path)</span><br><span class="line">Out[<span class="number">3</span>]:</span><br><span class="line">[<span class="string">&#x27;AirSpaceChannel.etl&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;Application.evtx&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;HardwareEvents.evtx&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;Hewlett-Packard.evtx&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;Internet Explorer.evtx&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件重命名"><a href="#文件重命名" class="headerlink" title="文件重命名"></a>文件重命名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.rename(old_name, new_name)</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取扩展类型"><a href="#获取扩展类型" class="headerlink" title="获取扩展类型"></a>获取扩展类型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">9</span>]: os.path.splitext(<span class="string">&#x27;Blasphemous.exe&#x27;</span>)</span><br><span class="line">Out[<span class="number">9</span>]: (<span class="string">&#x27;Blasphemous&#x27;</span>, <span class="string">&#x27;.exe&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取文件大小（字节）"><a href="#获取文件大小（字节）" class="headerlink" title="获取文件大小（字节）"></a><strong>获取文件大小</strong>（字节）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">5</span>]: file_path = <span class="string">&quot;C:\\Users\\Desktop\\hello-world\\utils.py&quot;</span></span><br><span class="line">In [<span class="number">6</span>]: os.path.getsize(file_path)</span><br><span class="line">Out[<span class="number">6</span>]: <span class="number">1142</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a><strong>删除文件</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">7</span>]: file_path = <span class="string">&quot;C:\\Users\\Desktop\\hello-world\\清空日志.py&quot;</span></span><br><span class="line">In [<span class="number">8</span>]: os.remove(file_path)</span><br></pre></td></tr></table></figure>
+
+<h4 id="判断文件-or-文件夹（文件必须真实存在）"><a href="#判断文件-or-文件夹（文件必须真实存在）" class="headerlink" title="判断文件 or 文件夹（文件必须真实存在）"></a><strong>判断文件 or 文件夹</strong>（文件必须真实存在）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">10</span>]: file_path = <span class="string">&quot;C:\\Users\\Desktop\\hello-world\\utils.py&quot;</span></span><br><span class="line">In [<span class="number">11</span>]: os.path.isfile(file_path)</span><br><span class="line">Out[<span class="number">11</span>]: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">12</span>]: dir_path = <span class="string">&quot;C:\\Users\\Desktop\\hello-world&quot;</span></span><br><span class="line">In [<span class="number">13</span>]: os.path.isdir(dir_path)</span><br><span class="line">Out[<span class="number">13</span>]: <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="获取当前目录"><a href="#获取当前目录" class="headerlink" title="获取当前目录"></a><strong>获取当前目录</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">2</span>]: os.getcwd()</span><br><span class="line">Out[<span class="number">2</span>]: <span class="string">&#x27;D:\\python\\Scripts&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(__file__)</span><br><span class="line"><span class="built_in">print</span>(os.getcwd())</span><br><span class="line"><span class="built_in">print</span>(os.path.dirname(__file__))</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">C:\Users\new-hello-world\ipython脚本测试\path_test.py</span></span><br><span class="line"><span class="string">C:\Users\new-hello-world\ipython脚本测试</span></span><br><span class="line"><span class="string">C:\Users\new-hello-world\ipython脚本测试</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="获取父级目录"><a href="#获取父级目录" class="headerlink" title="获取父级目录"></a><strong>获取父级目录</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">3</span>]: os.path.dirname(os.getcwd())</span><br><span class="line">Out[<span class="number">3</span>]: <span class="string">&#x27;D:\\python&#x27;</span></span><br><span class="line"></span><br><span class="line">p1 = os.path.abspath(<span class="string">&quot;../..&quot;</span>)  <span class="comment"># 父父父级</span></span><br><span class="line">p2 = os.path.abspath(<span class="string">&quot;..&quot;</span>)  <span class="comment"># 父父级</span></span><br><span class="line">p3 = os.path.abspath(<span class="string">&quot;.&quot;</span>)  <span class="comment"># 父级</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="路径合并"><a href="#路径合并" class="headerlink" title="路径合并"></a>路径合并</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">26</span>]: d1 = <span class="string">&quot;C:\\Users\\new-hello-world\\ipython脚本测试&quot;</span></span><br><span class="line">In [<span class="number">32</span>]: d2 = <span class="string">&quot;cxs&quot;</span></span><br><span class="line">In [<span class="number">30</span>]: d3 = <span class="string">&quot;cxs.png&quot;</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">33</span>]: os.path.join(d1, d2, d3)</span><br><span class="line">Out[<span class="number">33</span>]: <span class="string">&#x27;C:\\Users\\new-hello-world\\ipython脚本测试\\cxs\\cxs.png&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.mkdir(folder)</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件移动"><a href="#文件移动" class="headerlink" title="文件移动"></a>文件移动</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutil.move(old_src, new_src)</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取计算机名"><a href="#获取计算机名" class="headerlink" title="获取计算机名"></a>获取计算机名</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.popen(<span class="string">&quot;hostname&quot;</span>).read()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="time-perf-counter（计算秒数）"><a href="#time-perf-counter（计算秒数）" class="headerlink" title="time.perf_counter（计算秒数）"></a>time.perf_counter（计算秒数）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    a = time.perf_counter()</span><br><span class="line">    <span class="built_in">print</span>(a)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    b = time.perf_counter()</span><br><span class="line">    <span class="built_in">print</span>(b)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">输出：（时间从b）</span></span><br><span class="line"><span class="string">209.6693149</span></span><br><span class="line"><span class="string">210.6700619</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="windows消息弹窗"><a href="#windows消息弹窗" class="headerlink" title="windows消息弹窗"></a>windows消息弹窗</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">pip install pywin32</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">import</span> win32api, win32con</span><br><span class="line"></span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, <span class="string">&quot;提醒OK消息框&quot;</span>, <span class="string">&quot;提醒&quot;</span>, win32con.MB_OK)</span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, <span class="string">&quot;是否信息框&quot;</span>, <span class="string">&quot;提醒&quot;</span>, win32con.MB_YESNO)</span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, <span class="string">&quot;说明信息框&quot;</span>, <span class="string">&quot;提醒&quot;</span>, win32con.MB_HELP)</span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, <span class="string">&quot;警告信息框&quot;</span>, <span class="string">&quot;提醒&quot;</span>, win32con.MB_ICONWARNING)</span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, <span class="string">&quot;疑问信息框&quot;</span>, <span class="string">&quot;提醒&quot;</span>, win32con.MB_ICONQUESTION)</span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, <span class="string">&quot;提示信息框&quot;</span>, <span class="string">&quot;提醒&quot;</span>, win32con.MB_ICONASTERISK)</span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, <span class="string">&quot;确认信息框&quot;</span>, <span class="string">&quot;提醒&quot;</span>, win32con.MB_OKCANCEL)</span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, <span class="string">&quot;重试信息框&quot;</span>, <span class="string">&quot;提醒&quot;</span>, win32con.MB_RETRYCANCEL)</span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, <span class="string">&quot;是否取消信息框&quot;</span>, <span class="string">&quot;提醒&quot;</span>, win32con.MB_YESNOCANCEL)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 窗口置顶</span></span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, msg, <span class="string">&quot;涨停板开啦 ↑↑↑↑↑↑&quot;</span>, win32con.MB_TOPMOST) </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="merry异常处理（https-zhuanlan-zhihu-com-p-390111195）"><a href="#merry异常处理（https-zhuanlan-zhihu-com-p-390111195）" class="headerlink" title="merry异常处理（https://zhuanlan.zhihu.com/p/390111195）"></a>merry异常处理（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/390111195%EF%BC%89">https://zhuanlan.zhihu.com/p/390111195）</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> merry <span class="keyword">import</span> Merry</span><br><span class="line"></span><br><span class="line">merry = Merry()</span><br><span class="line">merry.logger.disabled = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@merry._try</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process</span>(<span class="params">num1, num2, file</span>):</span><br><span class="line">    result = num1 / num2</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(<span class="built_in">str</span>(result))</span><br><span class="line"></span><br><span class="line"><span class="meta">@merry._except(<span class="params">ZeroDivisionError</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_zero_division_error</span>(<span class="params">e</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;zero_division_error&#x27;</span>, e)</span><br><span class="line"></span><br><span class="line"><span class="meta">@merry._except(<span class="params">FileNotFoundError</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_file_not_found_error</span>(<span class="params">e</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;file_not_found_error&#x27;</span>, e)</span><br><span class="line"></span><br><span class="line"><span class="meta">@merry._except(<span class="params">Exception</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_exception</span>(<span class="params">e</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;exception&#x27;</span>, <span class="built_in">type</span>(e), e)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码作用相当于：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">example</span>(<span class="params">num1, num2, path</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        result = num1 / num2</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            file.read()</span><br><span class="line">    <span class="keyword">except</span> ZeroDivisionError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;num2 cannot be zero!&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> TypeError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;num1 and num2 should be number!&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> FileNotFoundError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;file <span class="subst">&#123;path&#125;</span> not found!&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;exception information: <span class="subst">&#123;e.args&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>不过多了几个优点：</p>
+<ul>
+<li><strong>可复用</strong></li>
+<li><strong>逻辑代码模块</strong>与<strong>异常处理模块</strong>分离</li>
+</ul>
+<h3 id="lambda用法"><a href="#lambda用法" class="headerlink" title="lambda用法:"></a>lambda用法:</h3><blockquote>
+<p>冒号左边是<code>参数</code>，可以有多个，用逗号隔开</p>
+<p>冒号右边为<code>表达式</code>，lambda 返回值是<strong>一个函数的地址，也就是函数对象</strong>。</p>
+</blockquote>
+<p><strong>配合其他函数：</strong></p>
+<ul>
+<li><p><strong>filter</strong>，用于过滤列表元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">4</span>]: <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">3</span> == <span class="number">0</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]))</span><br><span class="line">Out[<span class="number">5</span>]: [<span class="number">3</span>]</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>sorted</strong>，用于排序列表元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按照元素与5距离从小到大进行排序</span></span><br><span class="line">In [<span class="number">6</span>]: <span class="built_in">sorted</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>], key=<span class="keyword">lambda</span> x: <span class="built_in">abs</span>(<span class="number">5</span>-x))</span><br><span class="line">Out[<span class="number">6</span>]: [<span class="number">5</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>map</strong>，把操作映射到列表的每个元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">8</span>]: <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> x: x+<span class="number">1</span>, [<span class="number">1</span>, <span class="number">2</span>,<span class="number">3</span>]))</span><br><span class="line">Out[<span class="number">8</span>]: [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>reduce</strong>，用于指定列表中两两相邻元素的结合条件</p>
+<blockquote>
+<p>注意最后只返回<strong>一个结果</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">12</span>]: lst = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">In [<span class="number">13</span>]: reduce(<span class="keyword">lambda</span> a, b: <span class="string">&#x27;&#123;&#125;, &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(a, b), lst)</span><br><span class="line">Out[<span class="number">13</span>]: <span class="string">&#x27;1, 2, 3, 4, 5, 6, 7, 8, 9&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="mimetypes-获取-content-type"><a href="#mimetypes-获取-content-type" class="headerlink" title="mimetypes 获取 content-type"></a>mimetypes 获取 content-type</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">26</span>]: <span class="keyword">from</span> mimetypes <span class="keyword">import</span> types_map</span><br><span class="line">In [<span class="number">32</span>]: types_map[<span class="string">&#x27;.png&#x27;</span>]</span><br><span class="line"></span><br><span class="line">Out[<span class="number">32</span>]: <span class="string">&#x27;image/png&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="muggle-ocr-文字识别"><a href="#muggle-ocr-文字识别" class="headerlink" title="muggle_ocr 文字识别"></a>muggle_ocr 文字识别</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> muggle_ocr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">muggle_captcha</span>(<span class="params">img: <span class="built_in">bytes</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    验证码识别</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    sdk = muggle_ocr.SDK(model_type=muggle_ocr.ModelType.Captcha)</span><br><span class="line">    result = sdk.predict(image_bytes=img)</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="关闭requests警告"><a href="#关闭requests警告" class="headerlink" title="关闭requests警告"></a>关闭requests警告</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">urllib3.disable_warnings()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="汉字转拼音（pypinyin）"><a href="#汉字转拼音（pypinyin）" class="headerlink" title="汉字转拼音（pypinyin）"></a>汉字转拼音（pypinyin）</h3><p><a target="_blank" rel="noopener" href="https://pypinyin.readthedocs.io/zh_CN/master/">https://pypinyin.readthedocs.io/zh_CN/master/</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">10</span>]: <span class="keyword">from</span> pypinyin <span class="keyword">import</span> pinyin, Style</span><br><span class="line"></span><br><span class="line">In [<span class="number">12</span>]: s = <span class="string">&quot;拜尔3434kdjfkj&quot;</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">13</span>]: pinyin(s, style=Style.FIRST_LETTER)</span><br><span class="line">Out[<span class="number">13</span>]: [[<span class="string">&#x27;b&#x27;</span>], [<span class="string">&#x27;e&#x27;</span>], [<span class="string">&#x27;3434kdjfkj&#x27;</span>]]</span><br><span class="line"></span><br><span class="line">In [<span class="number">14</span>]: result = pinyin(s, style=Style.FIRST_LETTER)</span><br><span class="line"></span><br><span class="line">In [<span class="number">15</span>]: <span class="string">&quot;&quot;</span>.join(l[<span class="number">0</span>] <span class="keyword">for</span> l <span class="keyword">in</span> result)</span><br><span class="line">Out[<span class="number">15</span>]: <span class="string">&#x27;be3434kdjfkj&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="tenacity重试"><a href="#tenacity重试" class="headerlink" title="tenacity重试"></a>tenacity重试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@tenacity.retry(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="meta">    reraise=<span class="literal">True</span>,  <span class="comment"># 达到最大重试次数，重新抛出异常</span></span></span></span><br><span class="line"><span class="params"><span class="meta">    stop=stop_after_attempt(<span class="params"><span class="number">10</span></span>),  <span class="comment"># 重试次数</span></span></span></span><br><span class="line"><span class="params"><span class="meta">    wait=wait_fixed(<span class="params"><span class="number">1</span></span>)  <span class="comment"># 时间间隔</span></span></span></span><br><span class="line"><span class="params"><span class="meta"></span>)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="安装Crypto加密模块"><a href="#安装Crypto加密模块" class="headerlink" title="安装Crypto加密模块"></a>安装Crypto加密模块</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip uninstall crypto</span><br><span class="line">pip uninstall pycryptodome</span><br><span class="line">pip install pycryptodome</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chen Xs</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://chenxs1427.github.io/2022/05/17/Python%E7%BC%96%E7%A8%8B-%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%88%E4%BA%8C%EF%BC%89/">https://chenxs1427.github.io/2022/05/17/Python%E7%BC%96%E7%A8%8B-%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%88%E4%BA%8C%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://chenxs1427.github.io" target="_blank">Chen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/09/28/uqsKRJyDPXY6cIN.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/17/web%E9%80%86%E5%90%91-%E5%AD%97%E4%BD%93%E5%8F%8D%E7%88%AC%EF%BC%88%E4%B8%80%EF%BC%89/"><img class="prev-cover" src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/cBSAn9Vq3apwg82.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">web逆向-字体反爬（一）</div></div></a></div><div class="next-post pull-right"><a href="/2022/05/16/web%E9%80%86%E5%90%91-2captcha%E7%A0%B4%E8%A7%A3%E6%9E%81%E9%AA%8C%E6%96%87%E5%AD%97%E7%82%B9%E9%80%89/"><img class="next-cover" src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/89uh6qrbl3eIAPf.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">web逆向-2captcha破解极验文字点选</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/06/28/qRyt6e5NoVs4cdD.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chen Xs</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cxs1427" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip-%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">pip 笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Win10-cmd-%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">Win10 cmd 设置代理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D"><span class="toc-number">2.</span> <span class="toc-text">英文单词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B4utf8%E4%BD%9C%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">文件头utf8作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%BB%E7%9F%B3%E7%BB%A7%E6%89%BF%EF%BC%9A%EF%BC%88%E5%A4%9A%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">钻石继承：（多继承问题）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OS-%E6%A8%A1%E5%9D%97%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">OS 模块操作文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">6.1.</span> <span class="toc-text">遍历文件夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">6.2.</span> <span class="toc-text">获取所有文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E9%87%8D%E5%91%BD%E5%90%8D"><span class="toc-number">6.3.</span> <span class="toc-text">文件重命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%89%A9%E5%B1%95%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.4.</span> <span class="toc-text">获取扩展类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%EF%BC%88%E5%AD%97%E8%8A%82%EF%BC%89"><span class="toc-number">6.5.</span> <span class="toc-text">获取文件大小（字节）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="toc-number">6.6.</span> <span class="toc-text">删除文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%96%87%E4%BB%B6-or-%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%88%E6%96%87%E4%BB%B6%E5%BF%85%E9%A1%BB%E7%9C%9F%E5%AE%9E%E5%AD%98%E5%9C%A8%EF%BC%89"><span class="toc-number">6.7.</span> <span class="toc-text">判断文件 or 文件夹（文件必须真实存在）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95"><span class="toc-number">6.8.</span> <span class="toc-text">获取当前目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%88%B6%E7%BA%A7%E7%9B%AE%E5%BD%95"><span class="toc-number">6.9.</span> <span class="toc-text">获取父级目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%90%88%E5%B9%B6"><span class="toc-number">6.10.</span> <span class="toc-text">路径合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">6.11.</span> <span class="toc-text">创建文件夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%A7%BB%E5%8A%A8"><span class="toc-number">6.12.</span> <span class="toc-text">文件移动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%90%8D"><span class="toc-number">6.13.</span> <span class="toc-text">获取计算机名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#time-perf-counter%EF%BC%88%E8%AE%A1%E7%AE%97%E7%A7%92%E6%95%B0%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">time.perf_counter（计算秒数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windows%E6%B6%88%E6%81%AF%E5%BC%B9%E7%AA%97"><span class="toc-number">8.</span> <span class="toc-text">windows消息弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#merry%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%88https-zhuanlan-zhihu-com-p-390111195%EF%BC%89"><span class="toc-number">9.</span> <span class="toc-text">merry异常处理（https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;390111195）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda%E7%94%A8%E6%B3%95"><span class="toc-number">10.</span> <span class="toc-text">lambda用法:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mimetypes-%E8%8E%B7%E5%8F%96-content-type"><span class="toc-number">11.</span> <span class="toc-text">mimetypes 获取 content-type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#muggle-ocr-%E6%96%87%E5%AD%97%E8%AF%86%E5%88%AB"><span class="toc-number">12.</span> <span class="toc-text">muggle_ocr 文字识别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%ADrequests%E8%AD%A6%E5%91%8A"><span class="toc-number">13.</span> <span class="toc-text">关闭requests警告</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%89%E5%AD%97%E8%BD%AC%E6%8B%BC%E9%9F%B3%EF%BC%88pypinyin%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">汉字转拼音（pypinyin）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tenacity%E9%87%8D%E8%AF%95"><span class="toc-number">15.</span> <span class="toc-text">tenacity重试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Crypto%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%9D%97"><span class="toc-number">16.</span> <span class="toc-text">安装Crypto加密模块</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/01/28/%E4%BA%AC%E4%B8%9Cm%E7%AB%AFh5st%E9%80%86%E5%90%91/" title="京东m端h5st逆向"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/VOJf1QrHL2gl9X4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="京东m端h5st逆向"/></a><div class="content"><a class="title" href="/2024/01/28/%E4%BA%AC%E4%B8%9Cm%E7%AB%AFh5st%E9%80%86%E5%90%91/" title="京东m端h5st逆向">京东m端h5st逆向</a><time datetime="2024-01-27T16:37:47.000Z" title="发表于 2024-01-28 00:37:47">2024-01-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/05/%E5%B0%8F%E8%82%A9%E8%86%80js%E8%A1%A5%E7%8E%AF%E5%A2%83%E8%AF%BE%E7%A8%8B/" title="小肩膀js补环境课程"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/l1oxC2YHL9raeT3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="小肩膀js补环境课程"/></a><div class="content"><a class="title" href="/2024/01/05/%E5%B0%8F%E8%82%A9%E8%86%80js%E8%A1%A5%E7%8E%AF%E5%A2%83%E8%AF%BE%E7%A8%8B/" title="小肩膀js补环境课程">小肩膀js补环境课程</a><time datetime="2024-01-05T10:03:40.000Z" title="发表于 2024-01-05 18:03:40">2024-01-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/10/docker%E7%AC%94%E8%AE%B0/" title="docker学习笔记"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/vcDPi9YnKjhJABX.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker学习笔记"/></a><div class="content"><a class="title" href="/2023/12/10/docker%E7%AC%94%E8%AE%B0/" title="docker学习笔记">docker学习笔记</a><time datetime="2023-12-09T22:42:39.000Z" title="发表于 2023-12-10 06:42:39">2023-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/07/%E6%B5%B7%E5%A4%96%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%B1%87%E6%80%BB/" title="海外数据采集汇总"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/rYJHbGxS9yDacLu.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="海外数据采集汇总"/></a><div class="content"><a class="title" href="/2023/12/07/%E6%B5%B7%E5%A4%96%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%B1%87%E6%80%BB/" title="海外数据采集汇总">海外数据采集汇总</a><time datetime="2023-12-07T03:54:45.000Z" title="发表于 2023-12-07 11:54:45">2023-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/26/python%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%9B%9B/" title="python编程技巧（四）"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/Fs8u7mwTRkEUqAN.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python编程技巧（四）"/></a><div class="content"><a class="title" href="/2023/10/26/python%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%9B%9B/" title="python编程技巧（四）">python编程技巧（四）</a><time datetime="2023-10-26T08:13:29.000Z" title="发表于 2023-10-26 16:13:29">2023-10-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><!-- if theme.footer.owner.since && theme.footer.owner.since != nowYear// .copyright!= `&copy;${theme.footer.owner.since} - ${nowYear} By ${config.author}`--><!-- else--><div class="copyright">&copy;某年某月 <i class='fas fa-bug fa-spin'></i> By Chen Xs</div><!-- if theme.footer.copyright// .framework-info
+  // span= _p('footer.framework') + ' '
+  // a(href='https://hexo.io')= 'Hexo'
+  // span.footer-separator |
+  // span= _p('footer.theme') + ' '
+  // a(href='https://github.com/jerryc127/hexo-theme-butterfly')= 'Butterfly'--><!-- if theme.footer.custom_text// .footer_custom_text!=`${theme.footer.custom_text}`
+--></div><div class="container" id="jsi-flying-fish-container"><script src="/js/fish.js"></script></div><style>   @media only screen and (max-width: 767px){
+   #sidebar_search_box input[type=text]{width:calc(100% - 24px)}
+}</style></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script src="/js/fish_jquery.js"></script><script src="/js/chocolate.js"></script><script src="/js/fish.js"></script><div class="aplayer no-destroy" data-id="3145079790" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/SerokSSR/cdn/meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script type="text/javascript">var font='Computerfont'</script><script data-pjax>function electric_clock_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img id="card-clock-loading" src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading" class="entered loading"></div></div></div></div></div>';
+                console.log('已挂载electric_clock')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='all'|| 'all' ==='all')){
+
+            electric_clock_injector_config()
+        } </script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+        <script type="text/javascript">
+            loc = $.ajax({
+                    url: "https://ipapi.co/json/",  //json文件位置，文件名
+                    type: "GET",                    //请求方式为get
+                    dataType: "json",               //返回数据格式为json
+                    async: false,
+                    success: function(data) {       //请求成功完成后要执行的方法 
+                    }
+                });
+            ip=$.parseJSON(loc.responseText).ip;
+            version=$.parseJSON(loc.responseText).version;
+            city=$.parseJSON(loc.responseText).city;
+            country=$.parseJSON(loc.responseText).country_name;
+        </script>
+        <script data-pjax src="https://cdn.jsdelivr.net/npm/hexo-electric-clock-plus@latest/js/clock.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题为Butterfly" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><!-- hexo injector body_end end --></body></html>

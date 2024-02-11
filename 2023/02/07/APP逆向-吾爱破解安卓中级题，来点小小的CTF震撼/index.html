@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>APP逆向-吾爱破解2023安卓中级题，来点小小的CTF震撼 | Chen's Blog</title><meta name="author" content="Chen Xs"><meta name="copyright" content="Chen Xs"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="先来看看APP界面  拖到jadx，see see  java 源码  关键是要让代码跳转到这里，我这里主要是修改smali，然后重新签名打包，当然，你也可以用frida或者objection hook 传参  模仿下面的两行代码，在位置1插入 12:cond_63:goto_63  然后，修改上面的两个if判断，重新打包，跳转成功  过了这个，但还是啥都没有，只跳出一句话，再看源码，注意到两处可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APP逆向-吾爱破解2023安卓中级题，来点小小的CTF震撼">
+<meta property="og:url" content="https://chenxs1427.github.io/2023/02/07/APP%E9%80%86%E5%90%91-%E5%90%BE%E7%88%B1%E7%A0%B4%E8%A7%A3%E5%AE%89%E5%8D%93%E4%B8%AD%E7%BA%A7%E9%A2%98%EF%BC%8C%E6%9D%A5%E7%82%B9%E5%B0%8F%E5%B0%8F%E7%9A%84CTF%E9%9C%87%E6%92%BC/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="先来看看APP界面  拖到jadx，see see  java 源码  关键是要让代码跳转到这里，我这里主要是修改smali，然后重新签名打包，当然，你也可以用frida或者objection hook 传参  模仿下面的两行代码，在位置1插入 12:cond_63:goto_63  然后，修改上面的两个if判断，重新打包，跳转成功  过了这个，但还是啥都没有，只跳出一句话，再看源码，注意到两处可">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/09/28/u1BmwhznWcxfarX.jpg">
+<meta property="article:published_time" content="2023-02-07T06:37:10.000Z">
+<meta property="article:modified_time" content="2024-02-11T14:05:09.071Z">
+<meta property="article:author" content="Chen Xs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/28/u1BmwhznWcxfarX.jpg"><link rel="shortcut icon" href="https://s2.loli.net/2023/04/15/3vnNmAl8Yxa5EIK.png"><link rel="canonical" href="https://chenxs1427.github.io/2023/02/07/APP%E9%80%86%E5%90%91-%E5%90%BE%E7%88%B1%E7%A0%B4%E8%A7%A3%E5%AE%89%E5%8D%93%E4%B8%AD%E7%BA%A7%E9%A2%98%EF%BC%8C%E6%9D%A5%E7%82%B9%E5%B0%8F%E5%B0%8F%E7%9A%84CTF%E9%9C%87%E6%92%BC/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Chen Xs","link":"链接: ","source":"来源: Chen's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'APP逆向-吾爱破解2023安卓中级题，来点小小的CTF震撼',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-02-11 22:05:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-electric-clock-plus@latest/css/clock.css"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/06/28/qRyt6e5NoVs4cdD.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/cat/"><i class="fa-fw fas fa-regular fa-cat fa-bounce"></i><span> 喵喵</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/galleryGroup/"><i class="fa-fw fas fa-leaf"></i><span> 相册</span></a></li><li><a class="site-page child" href="/college-poems/"><i class="fa-fw fas fa-fire"></i><span> 诗选</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 读书</span></a></li><li><a class="site-page child" href="/cooks/"><i class="fa-fw fas fa-utensils"></i><span> 厨艺</span></a></li><li><a class="site-page child" href="/cinemas/"><i class="fa-fw fas fa-mountain"></i><span> 追剧</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-yin-yang"></i><span> 追番</span></a></li><li><a class="site-page child" href="/cars/"><i class="fa-fw fas fa-car"></i><span> 科目三</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/games/"><i class="fa-fw fas fa-sign-language"></i><span> 游戏</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/money/"><i class="fa-fw fas fa-sack-dollar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/about-me/"><i class="fa-fw fas fa-heart fa-beat"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/09/28/u1BmwhznWcxfarX.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Chen's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/cat/"><i class="fa-fw fas fa-regular fa-cat fa-bounce"></i><span> 喵喵</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/galleryGroup/"><i class="fa-fw fas fa-leaf"></i><span> 相册</span></a></li><li><a class="site-page child" href="/college-poems/"><i class="fa-fw fas fa-fire"></i><span> 诗选</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 读书</span></a></li><li><a class="site-page child" href="/cooks/"><i class="fa-fw fas fa-utensils"></i><span> 厨艺</span></a></li><li><a class="site-page child" href="/cinemas/"><i class="fa-fw fas fa-mountain"></i><span> 追剧</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-yin-yang"></i><span> 追番</span></a></li><li><a class="site-page child" href="/cars/"><i class="fa-fw fas fa-car"></i><span> 科目三</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/games/"><i class="fa-fw fas fa-sign-language"></i><span> 游戏</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/money/"><i class="fa-fw fas fa-sack-dollar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/about-me/"><i class="fa-fw fas fa-heart fa-beat"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">APP逆向-吾爱破解2023安卓中级题，来点小小的CTF震撼</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-07T06:37:10.000Z" title="发表于 2023-02-07 14:37:10">2023-02-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-11T14:05:09.071Z" title="更新于 2024-02-11 22:05:09">2024-02-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>先来看看APP界面</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/07/PjvE56ZRpHszgI4.png" alt="image.png"></p>
+<p>拖到jadx，see see  java 源码</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/01/28/Qiv5HFNjrumkcDd.png" alt="image.png"></p>
+<p>关键是要让代码跳转到这里，我这里主要是修改smali，然后重新签名打包，当然，你也可以用<strong>frida</strong>或者<strong>objection</strong> hook 传参</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/01/28/Um5JMjZdYnQA4ug.png" alt="image.png"></p>
+<p>模仿下面的两行代码，在位置1插入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:cond_63</span><br><span class="line">:goto_63</span><br></pre></td></tr></table></figure>
+
+<p>然后，修改上面的两个if判断，重新打包，跳转成功</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/01/28/9712pDuBP3ojFGY.png" alt="image.png"></p>
+<p>过了这个，但还是啥都没有，只跳出一句话，再看源码，注意到两处可疑的地方</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/07/U7qMacQOKh6fg8m.png" alt="image.png"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/07/uL6y2fBw3TqFOZp.png" alt="image.png"></p>
+<p>将apk改成压缩包，在里面找到  <code>aes.png</code> 和 <code>lib52pj.so</code> 两个文件</p>
+<p>先以文本形式打开 aes.png，得到一大段意义不明的文本</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/07/AMC4ov95SVHz2sG.png" alt="image.png"></p>
+<p>有点像是base64编码，decode一下</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/07/vINcRDC6dwuEeTj.png" alt="image.png"></p>
+<p>还是不明所以，先放一边……💀💀💀</p>
+<p>再来分析so，拖到 IDA Pro 分析</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/07/A5JRS14dDc9kryI.png" alt="image.png"></p>
+<p>进入 <code>Java_com_zj_wuaipojie2023_12_MainActivity_decrypt</code> 函数内部</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/07/Lwf9nprxbtF5eYV.png" alt="image.png"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/07/kLN4dwFhjSCuAHr.png" alt="image.png"></p>
+<p>这里可以确定加密算法是AES，模式是ECB，填充是PKCS7，<code>|wfkuqokj4548366</code> 刚好16位长度，疑似密钥</p>
+<p>到**<a target="_blank" rel="noopener" href="https://gchq.github.io/CyberChef/">CyberChef</a>**试试就知道了，显示参数出错，果然没那么简单 😥</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/07/MyBtgmoc3CIE9zQ.png" alt="image.png"></p>
+<p>到这里没什么头绪，看沐阳大佬说可以用unidbg下断点，但我一直找不到那个点，逛<a target="_blank" rel="noopener" href="https://www.52pojie.cn/forum.php?mod=viewthread&tid=1742339&page=1#pid45546422">论坛发现有佬</a>把<code>get_RealKey</code>扣了出来（好吧，我是菜🐶 ）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> key[] = <span class="string">&quot;|wfkuqokj4548366&quot;</span>;</span><br><span class="line">    <span class="type">char</span> add_mask[] = &#123; <span class="number">0xFB</span>, <span class="number">0xFE</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(key) - <span class="number">1</span>; i ++)</span><br><span class="line">        key[i] += add_mask[i &amp; <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;key = &#x27;%s&#x27;\n&quot;</span>, key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行拿到真实的key  <code>wuaipojie2023114</code></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/12/ZWmkO76H3JyzrpB.png" alt="image.png"></p>
+<p>拿到 cyber 上面，再增加一个 <strong>From Hex</strong>，得到结果如下：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/12/PSzrK2WEIipsqLC.png" alt="image.png"></p>
+<p>把结果保存成图片，得到表情包一枚 😂</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/12/dyVHSBI49rfWPzO.png" alt="image.png"></p>
+<p>按理说flag应该就藏在这张图里面了，Cyber 再加一个 <strong>To Hexdump</strong>，观察到有两个PNG的标志</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/12/AQ8w34NoaFrihsg.png" alt="image.png"></p>
+<p>也就是上面那张表情包，其实是两张图片拼凑而成，大佬们推荐的是用 <strong>010editor</strong> 拆分图片，我没用过这软件，也懒得去下 😂</p>
+<p>仔细想想，图片就是二进制数据，也就是 byte，能不能用python来拆呢？答案是肯定的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = <span class="built_in">open</span>(<span class="string">&quot;download.png&quot;</span>, <span class="string">&quot;rb&quot;</span>).read()</span><br></pre></td></tr></table></figure>
+
+<p>先获取字节，然后观察到有两个 <code>\x89PNG</code></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/12/4SmWdMjpKfty8ev.png" alt="image.png"></p>
+<p>拿第二个PNG，因为第一个其实就是上面那张表情包，第二个才是隐藏的图片，相当于被覆盖了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00d\x00\x00\x00d\x08\x06\x00\x00\x00p\xe2\x95T\x00\x00\x00\x01sRGB\x00\xae\xce\x1c\xe9\x00\x00\x00\x04sBIT\x08\x08\x08\x08|\x08d\x88\x00\x00\x03\x8cIDATx\x9c\xed\x9c\xdbn\xc30\x0cC\x9ba\xff\xff\xcb\xddS\x80\xcd\xa8JQ\x92\x1b&quot;\xe3y[\x93\xd8.d\xce\xba5\xc7\xf3\xf9|&gt;\x8c\x0c_W/\xc0\xfc\xc5\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xe3\xbb\xf2\xd0q\x1c\xa5\xc9\xd6&lt;\xe69\x0e\xcao\xa2\xf9\xce\xe7\xd7\xfb\xb2\xe3\xa2uM&#125;\xdf\x0cV\x88\x18%\x85\x9cdw\xc0\xba\xc3\xd0\x0e\x8c\xc6\x8d&gt;G;=\x82\x9d\xa7\xfa&#125;\x19\xac\x101Z\n9\x89v\x04\xdaih\&#x27;E\xd7\x91\xa2\xb2\xeb\xc9\x9ea\xd9uM\xd4\xfa\xac\x101F\x14R\x05\x9d\t\xd9\xe7\xa3\x9d\x8e\x94\x88\x94uEu\xdb\n\x11\xe3R\x85\xb0;7\xf2\xd6\x10YoN\xa1\xdf\xc3\n\x11cD!U/\xa5\x1a7DqLVAl&lt;\x93&#125;~\x02+D\x8c\x96B:\x11\xe9\xabq\x90\xd7\x84@\n\xaa\xfe\xbd\xaes\&#x27;V\x88\x18%\x85L\xfd\x0fe\xb3\xaa\xdd\xackU\x19\x9f\xf4\xbe\xac\x101\xb6\xc4!\xd5,\xebz\x1d)(\xab\xb0\xec&#125;\xd9y\xbb^\xda;\xac\x101Z\x15\xc3\xe9\n`u\x87f\xe3\x92h\x9e\xf5\xf9n=\xa4\x83\x15&quot;\xc61\xf9\x83\x1d\xd6\x7f\xcfzW\xac\xe2X\xaf\xaa:\xdf\x0e\xc5X!b\x8c(\x84\x8dt\xab\x111;&gt;Zgt\xbd\x8a+\x867d\xcb\x19r\xc2F\xc4\xd1x\xec&#125;S5\xf7\xec\xf8\x11\xee\xcb\xba\x01\xa3\x9d\x8b\xbb:\x00\xa3\xf9\xb3\xf1\xc2\x94\x17\xb6\xfb\x0cz&lt;\xac\x109F:\x17Qd\xcc~&gt;\xe5%e\xb3\xb6\xec\x19\xb7\xb3;\xc5\n\x11c\xb4\x1e\x82\xbc\x9cj\x165\x02\xcd\xc3\x9e5\xd1\xe7\xec&lt;\xee\xed\xbd\x11\xad8d\xeaw\x1b\xdd\xec/\x9a\x7f\x9d\&#x27;\xab\xe4\xeez\x1c\x87\xdc\x80\x91z\x08\xaaGT\xe3\x02\x96\xee\xfc\xeczvt\xa7X!b\x94\xce\x90\xe9\\Q\x95\xe9\x9cTv&#125;S&#125;d\xaf\xb0B\xc4\xd8\x9a\xed=\x99\xea\x08\xac\xc6)\xd5\x9d\xbf~\x8e\xd61\x11\xc1[!b\x8c\xc4!\xd5.\x93\x93\xa9\xec\xe9\xae\xca\xe3\xce\xfa\xc7\x8a\x15&quot;\xc6\xe8\xef\xd4\xab^O\xf4\xbfwz\xe7f\xb3\xd2l\x8e\xcb\xd9\xde\x1b3R1\xccf\x7f\xab\xf5\x86\xea\xfc\xd9\xf5D\xe3\xb0\xdd-\xee\xed\xbd!\x1f\xc9\xf6f\xefg\x9fc\x15\xd8\xdd\xd9\xdd~\xb3\x0cV\x88\x18[\xdf\x06\xd4\xcd\xeaf\xbb@\xd0\xba\xd8\x9a&gt;\xba\xcf5\xf5\x7f\xc4h=\xe4\x04\xd5\x17\xb2d\xeb\x14\xa8\xfe\xc1\xe6\xa6\xaa\xf5\x0c&#123;Y7dk\xd7\t[\xbb\xae\xee\xe4\xee\x0e\xcf*\x0ba/\xeb\x86l\xfd\x05\xd5t\x1fVv\xfe\x95n|\xb2\x8e\xb3\x13+D\x8c\xad\xb9\xac\xf5\xfe\xa9\x9a5&#123;Fe\xb3\xc4l\x0e-\x9ao\xfd\x9c\xc1\n\x11c\x8b\x97\x85\xeecw\x12\x9b\xa5\x9d\x82\xcdFW\xe3\xad\xdfX!b\\\xfa\xee\xf7h\xbcl\x9c\x83\xae\xb3\xf1\t\xca\x99M\x9f\x95\xaf\xb0B\xc4\xb8\xe4\xdd\xef\xd18\xd9\xacj\xf5\xcc\xa9V(\xa7+\xa2\xef\xb0B\xc4\xb8\xe4\xdd\xef\xd5\xebl\xd7\tR\x04:c\xaa9\xb1\x0eV\x88\x18\x97\xbc\xd9\xba\x1a\xb1O\xf5\xf6\xb2Y\xe8\xe8z\xb5O\xec\x1dV\x88\x18\x12\xef~_\x15\xc0z)\xdd\xfe(6\xeeA\x9d\x90\x8eCn\xc4%\xef~_\x9f\xfbt\x8d\x1b\xc5\r\xd5\x8e\xc6\xec\xf5wX!b\\\xfa\xee\xf7\xae\x97\x92\xf5\x8a\xd6\xf9\xd0z\xd0|\xecs\x0cV\x88\x18\xa35u\xd3\xc7\n\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xc3\x06\x11\xe3\x07\x00\xbc\xbf\xd9\x88\x91.k\x00\x00\x00\x00IEND\xaeB`\x82</span><br></pre></td></tr></table></figure>
+
+<p>另存到一张图片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;code2.png&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> p:</span><br><span class="line">	p.write(png_1)</span><br></pre></td></tr></table></figure>
+
+<p>结果是一张二维码，扫码就能得到 flag{Happy_New_Year_Wuaipojie2023} 了</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/02/12/4qtEDb6oUM92Wsd.png" alt="image.png"></p>
+<p>第一次玩这种比较有难度的CTF，感觉这玩意太考经验和综合能力了 🤐🤐🤐</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chen Xs</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://chenxs1427.github.io/2023/02/07/APP%E9%80%86%E5%90%91-%E5%90%BE%E7%88%B1%E7%A0%B4%E8%A7%A3%E5%AE%89%E5%8D%93%E4%B8%AD%E7%BA%A7%E9%A2%98%EF%BC%8C%E6%9D%A5%E7%82%B9%E5%B0%8F%E5%B0%8F%E7%9A%84CTF%E9%9C%87%E6%92%BC/">https://chenxs1427.github.io/2023/02/07/APP%E9%80%86%E5%90%91-%E5%90%BE%E7%88%B1%E7%A0%B4%E8%A7%A3%E5%AE%89%E5%8D%93%E4%B8%AD%E7%BA%A7%E9%A2%98%EF%BC%8C%E6%9D%A5%E7%82%B9%E5%B0%8F%E5%B0%8F%E7%9A%84CTF%E9%9C%87%E6%92%BC/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://chenxs1427.github.io" target="_blank">Chen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/09/28/u1BmwhznWcxfarX.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/30/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95/"><img class="prev-cover" src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/KwHa69fZlLbSNsF.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">抖音弹幕 WebSocket协议、Protobuf还原</div></div></a></div><div class="next-post pull-right"><a href="/2023/01/26/APP%E9%80%86%E5%90%91-%E4%BF%AE%E6%94%B9apk/"><img class="next-cover" src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/cfjRGouszO8KQbE.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">APP逆向-戒了吧去除开屏广告和强制更新</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/06/28/qRyt6e5NoVs4cdD.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chen Xs</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cxs1427" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/01/28/%E4%BA%AC%E4%B8%9Cm%E7%AB%AFh5st%E9%80%86%E5%90%91/" title="京东m端h5st逆向"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/VOJf1QrHL2gl9X4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="京东m端h5st逆向"/></a><div class="content"><a class="title" href="/2024/01/28/%E4%BA%AC%E4%B8%9Cm%E7%AB%AFh5st%E9%80%86%E5%90%91/" title="京东m端h5st逆向">京东m端h5st逆向</a><time datetime="2024-01-27T16:37:47.000Z" title="发表于 2024-01-28 00:37:47">2024-01-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/05/%E5%B0%8F%E8%82%A9%E8%86%80js%E8%A1%A5%E7%8E%AF%E5%A2%83%E8%AF%BE%E7%A8%8B/" title="小肩膀js补环境课程"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/l1oxC2YHL9raeT3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="小肩膀js补环境课程"/></a><div class="content"><a class="title" href="/2024/01/05/%E5%B0%8F%E8%82%A9%E8%86%80js%E8%A1%A5%E7%8E%AF%E5%A2%83%E8%AF%BE%E7%A8%8B/" title="小肩膀js补环境课程">小肩膀js补环境课程</a><time datetime="2024-01-05T10:03:40.000Z" title="发表于 2024-01-05 18:03:40">2024-01-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/10/docker%E7%AC%94%E8%AE%B0/" title="docker学习笔记"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/vcDPi9YnKjhJABX.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker学习笔记"/></a><div class="content"><a class="title" href="/2023/12/10/docker%E7%AC%94%E8%AE%B0/" title="docker学习笔记">docker学习笔记</a><time datetime="2023-12-09T22:42:39.000Z" title="发表于 2023-12-10 06:42:39">2023-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/07/%E6%B5%B7%E5%A4%96%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%B1%87%E6%80%BB/" title="海外数据采集汇总"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/rYJHbGxS9yDacLu.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="海外数据采集汇总"/></a><div class="content"><a class="title" href="/2023/12/07/%E6%B5%B7%E5%A4%96%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%B1%87%E6%80%BB/" title="海外数据采集汇总">海外数据采集汇总</a><time datetime="2023-12-07T03:54:45.000Z" title="发表于 2023-12-07 11:54:45">2023-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/26/python%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%9B%9B/" title="python编程技巧（四）"><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://s2.loli.net/2023/09/28/Fs8u7mwTRkEUqAN.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python编程技巧（四）"/></a><div class="content"><a class="title" href="/2023/10/26/python%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%9B%9B/" title="python编程技巧（四）">python编程技巧（四）</a><time datetime="2023-10-26T08:13:29.000Z" title="发表于 2023-10-26 16:13:29">2023-10-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><!-- if theme.footer.owner.since && theme.footer.owner.since != nowYear// .copyright!= `&copy;${theme.footer.owner.since} - ${nowYear} By ${config.author}`--><!-- else--><div class="copyright">&copy;某年某月 <i class='fas fa-bug fa-spin'></i> By Chen Xs</div><!-- if theme.footer.copyright// .framework-info
+  // span= _p('footer.framework') + ' '
+  // a(href='https://hexo.io')= 'Hexo'
+  // span.footer-separator |
+  // span= _p('footer.theme') + ' '
+  // a(href='https://github.com/jerryc127/hexo-theme-butterfly')= 'Butterfly'--><!-- if theme.footer.custom_text// .footer_custom_text!=`${theme.footer.custom_text}`
+--></div><div class="container" id="jsi-flying-fish-container"><script src="/js/fish.js"></script></div><style>   @media only screen and (max-width: 767px){
+   #sidebar_search_box input[type=text]{width:calc(100% - 24px)}
+}</style></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script src="/js/fish_jquery.js"></script><script src="/js/chocolate.js"></script><script src="/js/fish.js"></script><div class="aplayer no-destroy" data-id="3145079790" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/SerokSSR/cdn/meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script type="text/javascript">var font='Computerfont'</script><script data-pjax>function electric_clock_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img id="card-clock-loading" src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading" class="entered loading"></div></div></div></div></div>';
+                console.log('已挂载electric_clock')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='all'|| 'all' ==='all')){
+
+            electric_clock_injector_config()
+        } </script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+        <script type="text/javascript">
+            loc = $.ajax({
+                    url: "https://ipapi.co/json/",  //json文件位置，文件名
+                    type: "GET",                    //请求方式为get
+                    dataType: "json",               //返回数据格式为json
+                    async: false,
+                    success: function(data) {       //请求成功完成后要执行的方法 
+                    }
+                });
+            ip=$.parseJSON(loc.responseText).ip;
+            version=$.parseJSON(loc.responseText).version;
+            city=$.parseJSON(loc.responseText).city;
+            country=$.parseJSON(loc.responseText).country_name;
+        </script>
+        <script data-pjax src="https://cdn.jsdelivr.net/npm/hexo-electric-clock-plus@latest/js/clock.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题为Butterfly" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "https://cdn.jsdelivr.net/gh/cxs1427/my_blog_files/loading.gif" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><!-- hexo injector body_end end --></body></html>
