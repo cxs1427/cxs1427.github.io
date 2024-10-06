@@ -1,0 +1,195 @@
+/* 字体引入 */
+@font-face {
+  font-family: YSHST;
+  src: url(https://data-static.netdun.net/Fomalhaut/fonts/优设好身体.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: MiSans;
+  src: url(https://data-static.netdun.net/Fomalhaut/fonts/MiSans.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: HYTMR;
+  src: url(https://data-static.netdun.net/Fomalhaut/fonts/HYTangMeiRen55W.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: LXGW;
+  src: url(https://data-static.netdun.net/Fomalhaut/fonts/霞鹜文楷.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: TTQHB;
+  src: url(https://data-static.netdun.net/Fomalhaut/fonts/甜甜圈海报字体.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Consolas_1;
+  src: url(https://data-static.netdun.net/Fomalhaut/fonts/Consolas.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: ZhuZiAWan;
+  src: url(https://data-static.netdun.net/Fomalhaut/fonts/ZhuZiAWan2.woff2);
+  font-display: swap;
+}
+
+/* 特定部件字体调用 */
+div#menus {
+  font-weight: bold !important;
+}
+h1#site-title {
+  font-size: 3em !important;
+  font-weight: bold !important;
+}
+/* a.article-title, */
+/* a.blog-slider__title, */
+/* a.categoryBar-list-link, */
+/* h1.post-title { */
+  /* font-weight: bold !important; */
+/* } */
+
+/* .iconfont { */
+  /* font-family: "iconfont" !important; */
+  /* font-size: 3em; */
+  /* font-style: normal; */
+  /* -webkit-font-smoothing: antialiased; */
+  /* -moz-osx-font-smoothing: grayscale; */
+/* } */
+
+/* .icon-zhongbiao::before { */
+  /* color: #f7c768; */
+/* } */
+
+/* 侧边栏个人信息卡片动态渐变色 */
+#aside-content > .card-widget.card-info {
+  background: linear-gradient(
+    -45deg,
+    #e8d8b9,
+    #eccec5,
+    #a3e9eb,
+    #bdbdf0,
+    #eec1ea
+  );
+  box-shadow: 0 0 5px rgb(66, 68, 68);
+  position: relative;
+  background-size: 400% 400%;
+  -webkit-animation: Gradient 10s ease infinite;
+  -moz-animation: Gradient 10s ease infinite;
+  animation: Gradient 10s ease infinite !important;
+}
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 黑夜模式适配 */
+/* [data-theme="dark"] #aside-content > .card-widget.card-info { */
+  /* background: #191919ee; */
+/* } */
+
+/* 个人信息Follow me按钮 */
+#aside-content > .card-widget.card-info > #card-info-btn {
+  background-color: #3eb8be;
+  border-radius: 8px;
+}
+
+/* 头像呼吸灯 */
+[data-theme="light"] .avatar-img {
+  animation: huxi_light 4s ease-in-out infinite;
+}
+[data-theme="dark"] .avatar-img {
+  animation: huxi_dark 4s ease-in-out infinite;
+}
+@keyframes huxi_light {
+  0% {
+    box-shadow: 0px 0px 1px 1px #9ff2d2;
+  }
+  50% {
+    box-shadow: 0px 0px 5px 5px #9ff2d2;
+  }
+  100% {
+    box-shadow: 0px 0px 1px 1px #9ff2d2;
+  }
+}
+@keyframes huxi_dark {
+  0% {
+    box-shadow: 0px 0px 1px 1px #39c5bb;
+  }
+  50% {
+    box-shadow: 0px 0px 5px 5px #39c5bb;
+  }
+  100% {
+    box-shadow: 0px 0px 1px 1px #39c5bb;
+  }
+}
+
+/* 一级菜单居中 */
+#nav .menus_items {
+  /* 这个带不带都可以，本来就是inline */
+  display: inline;
+  position: absolute !important;
+  width: max-content !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+#nav .menus_items .menus_item {
+  padding: 0 0 0 8px !important;
+}
+
+/* 夜间模式菜单栏发光字 */
+#nav .site-page,
+#nav .menus_items .menus_item .menus_item_child li a {
+  text-shadow: 0 0 2px var(--theme-color) !important;
+}
+
+/* 手机端适配 */
+#sidebar #sidebar-menus .menus_items .site-page {
+  text-shadow: 0 0 2px var(--theme-color) !important;
+}
+
+/* 闪烁变动颜色连续渐变 */
+#site-name,
+#site-title,
+#site-subtitle,
+#post-info,
+.author-info__name,
+.author-info__description {
+  transition: text-shadow 1s linear !important;
+}
